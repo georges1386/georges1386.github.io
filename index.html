@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Nukempo</title>
+    <!-- ios support -->
+    <link rel="shortcut icon" href="image.png">
+    <link rel="apple-touch-icon" href="image.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#5bdb38" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#5bdb38" />
+</head>
+
+<body>
+    <style>
+        header img {
+            width: 60px;
+            object-fit: cover;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        * {
+            user-select: none;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        form {
+            display: block;
+            transition: display 300ms;
+        }
+
+        main>div {
+            display: none;
+            transition: display 300ms;
+        }
+
+        form,
+        label {
+            display: flex;
+            gap: 10px;
+            margin: 0 10px;
+            flex-direction: column;
+        }
+
+        input,
+        button {
+            line-height: 2rem;
+            border-radius: 10px;
+            box-shadow: 1px 1px 1px #5bdb38;
+            border: 1px solid #5bdb38;
+        }
+
+        button {
+            background-color: #5bdb38;
+            font-weight: bold;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+        }
+
+        article {
+            background-color: aqua;
+            width: 100%;
+            line-height: 3rem;
+            font-weight: bold;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+    <header>
+        <img src="image.png" alt="Logo de Nukempo">
+    </header>
+    <main>
+        <form method="post">
+            <h1>Identification</h1>
+            <label for="nom">
+                Votre nom
+                <input type="text" name="nom" id="nom" value="" required>
+            </label>
+            <label for="code">
+                Votre code d'accès
+                <input type="text" name="code" id="code" value="" required>
+            </label>
+            <button type="submit">Accéder</button>
+        </form>
+        <div>
+            <h1>Bonjour Georges</h1>
+            <p>Choississez le service qui vous convient</p>
+            <section>
+                <article>
+                    Faire une demande de crédit
+                </article>
+                <article>
+                    Accéder à votre compte epargne
+                </article>
+                <article>
+                    Voir les projets innovants
+                </article>
+                <article>
+                    Consulter mon portefeuille numérique
+                </article>
+            </section>
+        </div>
+    </main>
+    <script>
+        function authentification(e) {
+            e.preventDefault();
+            let nom = document.getElementById("nom");
+            let code = document.getElementById("code");
+            if (nom.value == "" && code.value == "") {
+                alert("Informations invalides");
+            } else {
+                document.querySelector("main > div > h1").innerHTML = `Bonjour ${nom.value}`
+                setTimeout(() => {
+                    document.querySelector("form").style.display = "none"
+                    document.querySelector("main > div").style.display = "block"
+                }, 500);
+            }
+        }
+
+        document.querySelector("form").onsubmit = authentification;
+
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker
+                    .register("/service-worker.js")
+                    .then(res => console.log("service worker registered"))
+                    .catch(err => console.log("service worker not registered", err))
+            })
+        }
+    </script>
+</body>
+
+</html>

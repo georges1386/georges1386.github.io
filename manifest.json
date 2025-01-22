@@ -1,0 +1,16 @@
+{
+    "name": "Nukempo",
+    "short_name": "Nukempo",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#fdfdfd",
+    "theme_color": "#5bdb38",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/image.png",
+            "type": "image/png",
+            "sizes": "500x500"
+        }
+    ]
+}
